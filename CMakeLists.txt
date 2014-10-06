@@ -651,6 +651,11 @@ configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/uvcdat.in
   @ONLY
 )
 
+configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/uvcdat.in
+  ${CMAKE_INSTALL_PREFIX}/wrappers/uvcdat
+  @ONLY
+)
+
 
 if (BUILD_TESTING)
   configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/runpytest.in
