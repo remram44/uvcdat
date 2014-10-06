@@ -656,13 +656,13 @@ configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/uvcdat.in
   @ONLY
 )
 
-configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/uvcdatpython.in
-  ${CMAKE_INSTALL_PREFIX}/bin/uvcdatpython
+configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/cdat.in
+  ${CMAKE_INSTALL_PREFIX}/bin/cdat
   @ONLY
 )
 
-configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/uvcdatpython.in
-  ${CMAKE_INSTALL_PREFIX}/wrappers/uvcdatpython
+configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/cdat.in
+  ${CMAKE_INSTALL_PREFIX}/wrappers/cdat
   @ONLY
 )
 
