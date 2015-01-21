@@ -643,11 +643,6 @@ message("[INFO] WGET EXEC: ${WGET_EXECUTABLE}")
 # Configure remaining files
 #-----------------------------------------------------------------------------
 
-# Where to install the wrapper scripts
-set(WRAPPER_BINARIES_LOCATION ${CMAKE_INSTALL_PREFIX}/wrappers
-    CACHE PATH
-    "Install wrapper scripts 'cdat', 'uvcdat' and 'activate_uvcdat' in that directory")
-
 # set candidate paths for setup_runtime scripts
 # will be added to environment variables in reverse order
 message("PARAVIEW VALS:${PARAVIEW_MAJOR}")
@@ -693,11 +688,6 @@ configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/setup_runtime.sh.in
   @ONLY
 )
 
-configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/setup_runtime.sh.in
-  ${WRAPPER_BINARIES_LOCATION}/activate_uvcdat
-  @ONLY
-)
-
 configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/preofflinebuild.sh.in
   ${cdat_BINARY_DIR}/preofflinebuild.sh
   @ONLY
@@ -708,28 +698,13 @@ configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/setup_runtime.csh.in
   @ONLY
 )
 
-configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/setup_runtime.csh.in
-  ${WRAPPER_BINARIES_LOCATION}/activate_uvcdat.csh
-  @ONLY
-)
-
 configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/uvcdat.in
   ${CMAKE_INSTALL_PREFIX}/bin/uvcdat
   @ONLY
 )
 
-configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/uvcdat.in
-  ${WRAPPER_BINARIES_LOCATION}/uvcdat
-  @ONLY
-)
-
 configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/cdat.in
   ${CMAKE_INSTALL_PREFIX}/bin/cdat
-  @ONLY
-)
-
-configure_file(${cdat_CMAKE_SOURCE_DIR}/cdat_modules_extra/cdat.in
-  ${WRAPPER_BINARIES_LOCATION}/cdat
   @ONLY
 )
 
@@ -741,6 +716,24 @@ if (BUILD_TESTING)
   )
   add_subdirectory(testing)
 endif()
+
+# Where to install the wrapper scripts
+set(WRAPPER_BINARIES_LOCATION ${CMAKE_INSTALL_PREFIX}/wrappers
+    CACHE PATH
+    "Install wrapper scripts 'cdat', 'uvcdat' and 'activate_uvcdat' in that directory")
+
+install(FILES ${CMAKE_INSTALL_PREFIX}/bin/setup_runtime.sh
+        DESTINATION ${WRAPPER_BINARIES_LOCATION}
+        RENAME activate_uvcdat)
+install(FILES ${CMAKE_INSTALL_PREFIX}/bin/setup_runtime.csh
+        DESTINATION ${WRAPPER_BINARIES_LOCATION}
+        RENAME activate_uvcdat.csh)
+install(FILES ${CMAKE_INSTALL_PREFIX}/bin/uvcdat
+        DESTINATION ${WRAPPER_BINARIES_LOCATION}
+        RENAME uvcdat)
+install(FILES ${CMAKE_INSTALL_PREFIX}/bin/cdat
+        DESTINATION ${WRAPPER_BINARIES_LOCATION}
+        RENAME cdat)
 
 # Package UV-CDAT with CPACK
 include(InstallRequiredSystemLibraries)
