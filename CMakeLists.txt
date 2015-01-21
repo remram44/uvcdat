@@ -728,10 +728,10 @@ install(FILES ${CMAKE_INSTALL_PREFIX}/bin/setup_runtime.sh
 install(FILES ${CMAKE_INSTALL_PREFIX}/bin/setup_runtime.csh
         DESTINATION ${WRAPPER_BINARIES_LOCATION}
         RENAME activate_uvcdat.csh)
-install(FILES ${CMAKE_INSTALL_PREFIX}/bin/uvcdat
+install(PROGRAMS ${CMAKE_INSTALL_PREFIX}/bin/uvcdat
         DESTINATION ${WRAPPER_BINARIES_LOCATION}
         RENAME uvcdat)
-install(FILES ${CMAKE_INSTALL_PREFIX}/bin/cdat
+install(PROGRAMS ${CMAKE_INSTALL_PREFIX}/bin/cdat
         DESTINATION ${WRAPPER_BINARIES_LOCATION}
         RENAME cdat)
 
