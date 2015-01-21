@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # source is not portable where as . is
 . "@CMAKE_INSTALL_PREFIX@/bin/setup_runtime.sh"
 python@PYVER@ "$@"
