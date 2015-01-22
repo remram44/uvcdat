@@ -35,6 +35,30 @@ library_paths=( @SETUP_LIBRARY_PATHS@ )
 python_paths=( @SETUP_PYTHON_PATHS@ )
 executable_paths=( @SETUP_EXECUTABLE_PATHS@ )
 
+# keeps old values around for deactivate
+_UVCDAT_SAVE="LD_LIBRARY_PATH PYTHONPATH PATH DYLD_FALLBACK_LIBRARY_PATH R_HOME
+              PS1 OPAL_PREFIX LIBOVERLAY_SCROLLBAR"
+for name in $_UVCDAT_SAVE ; do
+    if [ -n "${${name}+x}" ] ; then
+        eval $_UVCDAT_OLD_=\$${name}
+    fi
+done
+unset name
+
+# deactivate method restores old environment
+deactivate(){
+    for name in $_UVCDAT_SAVE ; do
+        if [ -n "${_UVCDAT_OLD_${name}+x}" ] ; then
+            eval $name=\$_UVCDAT_OLD_$name
+            unset _UVCDAT_OLD_$name
+        else
+            unset $name
+        fi
+    done
+    unset deactivate
+    unset UVCDAT_SETUP_PATH
+}
+
 if [ -z "$UVCDAT_DISABLE_PROMPT" ] ; then
     export PS1="(uvcdat)$PS1"
 fi
