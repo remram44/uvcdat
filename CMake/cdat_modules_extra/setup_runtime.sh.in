@@ -35,6 +35,10 @@ library_paths=( @SETUP_LIBRARY_PATHS@ )
 python_paths=( @SETUP_PYTHON_PATHS@ )
 executable_paths=( @SETUP_EXECUTABLE_PATHS@ )
 
+if [ -z "$UVCDAT_DISABLE_PROMPT" ] ; then
+    export PS1="(uvcdat)$PS1"
+fi
+
 if [ -d '@QT_LIB_DIR@' ] ; then
   LD_LIBRARY_PATH='@QT_LIB_DIR@:'"${LD_LIBRARY_PATH}"
 fi
@@ -55,6 +59,7 @@ for d in "${python_paths[@]}" ; do
   if [ -d "${f}" ] ; then
     PYTHONPATH="${f}:${PYTHONPATH}"
   fi
+  unset f
 done
 
 for d in "${executable_paths[@]}" ; do
@@ -62,6 +67,7 @@ for d in "${executable_paths[@]}" ; do
   if [ -d "${f}" ] ; then
     PATH="${f}:${PATH}"
   fi
+  unset f
 done
 
 if [ -d "${install_prefix}/Externals/lib/R" ] ; then
