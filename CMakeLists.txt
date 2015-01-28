@@ -767,6 +767,8 @@ endif()
 
 include(CPack)
 
+# Bad
+IF(0)
 install(CODE "
   set(SB_EXTERNALS_DIR ${SB_EXTERNALS_DIR})
   set(SB_LIB_DIR ${SB_LIB_DIR})
@@ -889,3 +891,4 @@ install(CODE "
 
   COMPONENT superbuild
 )
+ENDIF()
